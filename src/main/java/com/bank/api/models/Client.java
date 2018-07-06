@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -23,8 +24,9 @@ public class Client {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @OneToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "acc_id", nullable = false)
+	    @OneToOne(fetch = FetchType.LAZY,
+	            cascade =  CascadeType.ALL,
+	            mappedBy = "cli")
 	    private Account account;
 	   
 	    @NotBlank
@@ -37,7 +39,13 @@ public class Client {
 	    @OneToOne(fetch = FetchType.LAZY, optional = false)
 	    @JoinColumn(name = "addr_id", nullable = false)
 	    private Address addr;
-	        
+	    
+	    @OneToMany(mappedBy = "send", targetEntity = Transaction.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	    private List<Transaction> trans_send;
+
+	    @OneToMany(mappedBy = "rcv", targetEntity = Transaction.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	    private List<Transaction> trans_rcv;
+	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
 	    @CreatedDate
