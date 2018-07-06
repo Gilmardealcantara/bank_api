@@ -1,49 +1,33 @@
-package com.bank.api.models;
+package com.bank.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 
-
 @Entity
-@Table(name = "address")
+@Table(name = "account")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
         allowGetters = true)
-
-public class Address {
+public class Account {
 	   @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
-
-	    @NotBlank
-	    @Size(max = 255)
-	    private String street;
-
-	    @NotBlank
-	    private Integer number;
+	   	
+	    @NotNull
+	    private Long number;
 	    
-	    @NotBlank
-	    @Size(max = 50)
-	    private String city;
-
-	    @NotBlank
-	    @Size(max = 50)
-	    private String state;
-	    
-	    @NotBlank
-	    @Size(max = 50)
-	    private String country;
-
-	    @NotBlank
-	    @Size(max = 15)
-	    private String zipcode;
+	    @NotNull
+	    private Double balance;
+	    	    
+	    @OneToOne(fetch = FetchType.LAZY, optional = false)
+	    @JoinColumn(name = "client_id", nullable = false)
+	    private Client cli;
 	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
@@ -63,52 +47,28 @@ public class Address {
 			this.id = id;
 		}
 
-		public String getStreet() {
-			return street;
-		}
-
-		public void setStreet(String street) {
-			this.street = street;
-		}
-
-		public Integer getNumber() {
+		public Long getNumber() {
 			return number;
 		}
 
-		public void setNumber(Integer number) {
+		public void setNumber(Long number) {
 			this.number = number;
 		}
 
-		public String getCity() {
-			return city;
+		public Double getBalance() {
+			return balance;
 		}
 
-		public void setCity(String city) {
-			this.city = city;
+		public void setBalance(Double balance) {
+			this.balance = balance;
 		}
 
-		public String getState() {
-			return state;
+		public Client getCli() {
+			return cli;
 		}
 
-		public void setState(String state) {
-			this.state = state;
-		}
-
-		public String getCountry() {
-			return country;
-		}
-
-		public void setCountry(String country) {
-			this.country = country;
-		}
-
-		public String getZipcode() {
-			return zipcode;
-		}
-
-		public void setZipcode(String zipcode) {
-			this.zipcode = zipcode;
+		public void setCli(Client cli) {
+			this.cli = cli;
 		}
 
 		public Date getCreatedAt() {

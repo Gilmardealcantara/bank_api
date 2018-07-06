@@ -1,21 +1,17 @@
-package com.bank.api.models;
+package com.bank.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.Date;
-import java.io.Serializable;
 
 
 @Entity
 @Table(name = "transaction")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+@JsonIgnoreProperties(value = {"createdAt"}, 
         allowGetters = true)
 
 public class Transaction {
@@ -39,9 +35,43 @@ public class Transaction {
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	public Account getSend() {
+		return send;
+	}
+
+	public void setSend(Account send) {
+		this.send = send;
+	}
+
+	public Account getRcv() {
+		return rcv;
+	}
+
+	public void setRcv(Account rcv) {
+		this.rcv = rcv;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 }
