@@ -1,4 +1,4 @@
-package controller;
+package com.bank.api.controller;
 
 import com.bank.api.exception.ResourceNotFoundException;
 import com.bank.api.model.Account;
