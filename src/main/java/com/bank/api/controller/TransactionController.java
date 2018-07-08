@@ -68,11 +68,10 @@ public class TransactionController {
     	return transactionRepository.save(transaction);
     }
 
-    // Get a Single Transaction
+    // Get all transactions by client id
     @GetMapping("/transactions/{id}")
-    public Transaction getTransactionById(@PathVariable(value = "id") Long transactionId) {
-        return transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new ResourceNotFoundException("Transaction", "id", transactionId));
+    public  List<Transaction> getTransactionById(@PathVariable(value = "id") Long clientId) {
+    	return transactionRepository.findByClientId(clientId);
     }
     
     // Delete a Transaction
