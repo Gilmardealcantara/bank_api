@@ -58,15 +58,6 @@ public class Client {
 	    @JoinColumn(name = "account_id")
 	    private Account account;
 	    
-	    @OneToMany(mappedBy = "send", targetEntity = Transaction.class, 
-	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	    private List<Transaction> trans_send;
-
-	    @OneToMany(mappedBy = "rcv", targetEntity = Transaction.class, 
-	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	    private List<Transaction> trans_recv;
-	    
-	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
 	    @CreatedDate

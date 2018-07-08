@@ -31,12 +31,12 @@ public class Transaction {
     private Double value;
 
     @ManyToOne
-    @JoinColumn(name = "cli_send_id")
-    private Client send;
+    @JoinColumn(name = "acc_send_id")
+    private Account send;
 
     @ManyToOne
-    @JoinColumn(name = "cli_rcv_id")
-    private Client rcv;
+    @JoinColumn(name = "acc_rcv_id")
+    private Account rcv;
     
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -59,19 +59,19 @@ public class Transaction {
 		this.value = value;
 	}
 
-	public Client getSend() {
+	public Account getSend() {
 		return send;
 	}
 
-	public void setSend(Client send) {
+	public void setSend(Account send) {
 		this.send = send;
 	}
 	
-	public Client getRcv() {
+	public Account getRcv() {
 		return rcv;
 	}
 
-	public void setRcv(Client rcv) {
+	public void setRcv(Account rcv) {
 		this.rcv = rcv;
 	}
 

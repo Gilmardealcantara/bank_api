@@ -10,6 +10,6 @@ import com.bank.api.model.Transaction;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-	  @Query(value = "SELECT * FROM transaction WHERE CLI_SEND_ID = ?1", nativeQuery = true)
-	  List<Transaction> findByClientId(Long id);
+	  @Query(value = "SELECT * FROM transaction WHERE ACC_SEND_ID = ?1 OR ACC_RCV_ID = ?1", nativeQuery = true)
+	  List<Transaction> findByAccountId(Long id);
 }

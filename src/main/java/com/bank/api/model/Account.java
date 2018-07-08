@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -18,12 +19,18 @@ public class Account {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 	   	
-	    //@NotNull
 	    private Long number;
 	    
-	    //@NotNull
 	    private Double balance;
-	    	    	    
+	    
+	    @OneToMany(mappedBy = "send", targetEntity = Transaction.class, 
+	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	    private List<Transaction> trans_send;
+
+	    @OneToMany(mappedBy = "rcv", targetEntity = Transaction.class, 
+	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	    private List<Transaction> trans_recv;
+	     	    	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
 	    @CreatedDate
