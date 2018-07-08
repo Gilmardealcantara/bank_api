@@ -4,9 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
+import java.util.Date;
+/*
+ * request:
+{
+	"value": 100.00,
+	"send": {"id": 1},
+	"rcv": {"id": 2}
+}
+ * */
 
 @Entity
 @Table(name = "transaction")
@@ -19,16 +27,16 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     private Double value;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "acc_send", nullable = false)
-    private Account send;
-    
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "acc_rcv", nullable = false)
-    private Account rcv;
+    @ManyToOne
+    @JoinColumn(name = "cli_send_id")
+    private Client send;
+
+    @ManyToOne
+    @JoinColumn(name = "cli_rcv_id")
+    private Client rcv;
     
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,19 +59,19 @@ public class Transaction {
 		this.value = value;
 	}
 
-	public Account getSend() {
+	public Client getSend() {
 		return send;
 	}
 
-	public void setSend(Account send) {
+	public void setSend(Client send) {
 		this.send = send;
 	}
-
-	public Account getRcv() {
+	
+	public Client getRcv() {
 		return rcv;
 	}
 
-	public void setRcv(Account rcv) {
+	public void setRcv(Client rcv) {
 		this.rcv = rcv;
 	}
 
