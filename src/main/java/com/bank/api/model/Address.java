@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import java.util.Date;
@@ -22,26 +21,20 @@ public class Address {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @NotBlank
 	    @Size(max = 255)
 	    private String street;
 
-	    @NotBlank
 	    private Integer number;
 	    
-	    @NotBlank
 	    @Size(max = 50)
 	    private String city;
 
-	    @NotBlank
 	    @Size(max = 50)
 	    private String state;
 	    
-	    @NotBlank
 	    @Size(max = 50)
 	    private String country;
 
-	    @NotBlank
 	    @Size(max = 15)
 	    private String zipcode;
 	    

@@ -12,6 +12,25 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
+/*
+ request:
+{
+	"name":"Gilmar", 
+	"age": 25,
+	"addr": {
+		"street": "",
+		"number": 0,
+		"city": "",
+		"state": "",
+		"country": "",
+		"zipcode": ""
+	},
+	"account": {
+		"number":1, 
+		"balance": 50.00
+	}
+}
+ */
 @Entity
 @Table(name = "client")
 @EntityListeners(AuditingEntityListener.class)
@@ -24,27 +43,29 @@ public class Client {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @OneToOne(fetch = FetchType.LAZY,
-	            cascade =  CascadeType.ALL,
-	            mappedBy = "cli")
-	    private Account account;
-	   
-	    @NotBlank
+	    @NotBlank	
 	    @Size(max = 255)
-	    private Long name;
+	    private String name;
 
 	    @NotNull
 	    private Integer age;
 	    
-	    @OneToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "addr_id", nullable = false)
+	    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	    @JoinColumn(name = "addr_id")
 	    private Address addr;
 	    
-	    @OneToMany(mappedBy = "send", targetEntity = Transaction.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	    @JoinColumn(name = "account_id")
+	    private Account account;
+	    
+	    @OneToMany(mappedBy = "send", targetEntity = Transaction.class, 
+	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private List<Transaction> trans_send;
 
-	    @OneToMany(mappedBy = "rcv", targetEntity = Transaction.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	    private List<Transaction> trans_rcv;
+	    @OneToMany(mappedBy = "rcv", targetEntity = Transaction.class, 
+	    	    cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	    private List<Transaction> trans_recv;
+	    
 	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
@@ -64,11 +85,11 @@ public class Client {
 			this.id = id;
 		}
 
-		public Long getName() {
+		public String getName() {
 			return name;
 		}
 
-		public void setName(Long name) {
+		public void setName(String name) {
 			this.name = name;
 		}
 
@@ -79,7 +100,7 @@ public class Client {
 		public void setAge(Integer age) {
 			this.age = age;
 		}
-
+		
 		public Address getAddr() {
 			return addr;
 		}
@@ -87,7 +108,15 @@ public class Client {
 		public void setAddr(Address addr) {
 			this.addr = addr;
 		}
+		
+		public Account getAccount() {
+			return account;
+		}
 
+		public void setAccount(Account account) {
+			this.account = account;
+		}
+		
 		public Date getCreatedAt() {
 			return createdAt;
 		}
@@ -98,7 +127,7 @@ public class Client {
 
 		public Date getUpdatedAt() {
 			return updatedAt;
-		}
+		}	
 
 		public void setUpdatedAt(Date updatedAt) {
 			this.updatedAt = updatedAt;

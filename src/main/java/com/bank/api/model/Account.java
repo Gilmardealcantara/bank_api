@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -19,16 +18,12 @@ public class Account {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 	   	
-	    @NotNull
+	    //@NotNull
 	    private Long number;
 	    
-	    @NotNull
+	    //@NotNull
 	    private Double balance;
-	    	    
-	    @OneToOne(fetch = FetchType.LAZY, optional = false)
-	    @JoinColumn(name = "client_id", nullable = false)
-	    private Client cli;
-	    
+	    	    	    
 	    @Column(nullable = false, updatable = false)
 	    @Temporal(TemporalType.TIMESTAMP)
 	    @CreatedDate
@@ -61,14 +56,6 @@ public class Account {
 
 		public void setBalance(Double balance) {
 			this.balance = balance;
-		}
-
-		public Client getCli() {
-			return cli;
-		}
-
-		public void setCli(Client cli) {
-			this.cli = cli;
 		}
 
 		public Date getCreatedAt() {
