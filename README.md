@@ -16,6 +16,7 @@ country | String        |       user            |
 zipcode | String        |       user            |       
 
 Conta (ACCOUNT Type)
+
 Chave   |Tipo           |Permissão              |Descrição
 --------|---------      |---------------------  |----------
 id      | Long          |       system          |       Numero da conta
@@ -26,6 +27,7 @@ updateAt| String        |       system          |       Data a última atualiza�
 O número da conta é gerado automáticamente pelo sistema de maneira que sejá único.
 
 Cliente (CLIENT Type)
+
 Chave   |Tipo           |Permissão              |Descrição
 --------|---------      |---------------------  |----------
 name    | String        |       user            |       Nome completo do Cliente
@@ -36,6 +38,7 @@ createAt| String        |       sytem           |       Data de criação
 updateAt| String        |       system          |       Data a última atualização
 
 Transação
+
 Chave   |Tipo           |Permissão              |Descrição
 --------|---------      |---------------------  |----------
 value   | Double        |       user            |       Valor da tranferência
@@ -57,6 +60,7 @@ updateAt| String        |       system          |       Data a última atualiza�
 
 ### Métodos REST HTTP
 <model>: transactions, clients ou accounts
+
 Method          |URI
 ----------------|----------------
 GET(all)        | "/api/<model>" 
