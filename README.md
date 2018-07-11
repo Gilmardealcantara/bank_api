@@ -101,6 +101,17 @@ Envie o post com o body:
 
 ## Database schema
 ![alt text](https://raw.githubusercontent.com/Gilmardealcantara/bank_api/master/databasescheme.png)
+
+## Tecnologias
+
+Back-end Java
+
+* spring framework
+* hibernate
+* REST
+* maven
+
+
 ## Licence
 
 Desenvolvido por [Gilmar.Alcantara](https://github.com/Gilmardealcantara)
