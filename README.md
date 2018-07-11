@@ -1,5 +1,5 @@
 # [BANK API]
-#### API para simulaçoes de transações bancárias.
+#### API para simulações de transações bancárias.
 
 ## Spring Rest API
 ##### Especificações de dados JSON
@@ -21,10 +21,10 @@ Chave   |Tipo           |Permissão              |Descrição
 --------|---------      |---------------------  |----------
 id      | Long          |       system          |       Numero da conta
 balance | Double        |       user            |       Saldo da Conta 
-createAt| String        |       sytem           |       Data de criação
+createAt| String        |       system           |       Data de criação
 updateAt| String        |       system          |       Data a última atualização
 
-O número da conta é gerado automáticamente pelo sistema de maneira que sejá único.
+O número da conta é gerado automaticamente pelo sistema de maneira que será único.
 
 Cliente (CLIENT Type)
 
@@ -34,17 +34,17 @@ name    | String        |       user            |       Nome completo do Cliente
 age     | Integer       |       user            |       Idade do cliente 
 addr    | ADDR          |       user            |       Endereço do cliente 
 account | ACCOUNT       |       user            |       Conta corrente 
-createAt| String        |       sytem           |       Data de criação
+createAt| String        |       system          |       Data de criação
 updateAt| String        |       system          |       Data a última atualização
 
 Transação
 
 Chave   |Tipo           |Permissão              |Descrição
 --------|---------      |---------------------  |----------
-value   | Double        |       user            |       Valor da tranferência
+value   | Double        |       user            |       Valor da transferência
 send    | ACCOUNT       |       user            |       Conta que envia o valor
-cvb     | ACCOUNT       |       user            |       Conta que recebe o valor
-createAt| String        |       sytem           |       Data de criação
+rcv     | ACCOUNT       |       user            |       Conta que recebe o valor
+createAt| String        |       system           |       Data de criação
 updateAt| String        |       system          |       Data a última atualização
 
 
