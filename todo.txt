@@ -1,4 +1,0 @@
-Colocar tecnoligias usadas
-spring 
-hibernate
-	.....
